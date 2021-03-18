@@ -1,4 +1,4 @@
-# RIP-HLTV-BET
+# HLTV 广告去除插件
 
 ## 主要功能
 
