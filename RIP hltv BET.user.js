@@ -8,6 +8,7 @@
 // @author              Frank
 // @match               https://www.hltv.org/*
 // @icon                https://www.hltv.org/img/static/favicon/favicon-32x32.png
+// @license             MIT
 // @run-at              document-end
 // ==/UserScript==
 
