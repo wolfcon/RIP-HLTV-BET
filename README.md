@@ -2,7 +2,9 @@
 
 ## Features
 
-- RIP For those annoying background BET ADs
+- RIP for those annoying🤮 background BET ADs
+- RIP for other advertisements in some tricky way (but not perfect🤪)
+
 
 ## Source
 
