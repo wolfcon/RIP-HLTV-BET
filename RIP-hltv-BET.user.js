@@ -2,7 +2,7 @@
 // @name                RIP HLTV BET
 // @name:zh-CN          HLTV 广告去除插件
 // @namespace           https://github.com/wolfcon/RIP-HLTV-BET
-// @version             0.2
+// @version             0.3
 // @description         Remove hltv.org Annoy AD
 // @description:zh-cn   清除那些🤮背景赌博广告.
 // @author              Frank
@@ -17,16 +17,10 @@
     'use strict';
 
     function removeNonOfficialSiteElement(element) {
-        $.each(element.children(), function (index, ele) {
-            const adA = $(ele).find('a').not('[href^="/"]');
-            $(adA).remove();
-            // const finded = adA.length;
-            // if (finded > 0) {
-            //     $(ele).remove();
-            // }
-        });
+        const adA = $(element).find('a').not('[href^="/"]');
+        $(adA).remove();
     }
-
+    
     (function removeBackgroundAd() {
         document.body.removeAttribute("data-href");
         document.body.removeAttribute("style");
