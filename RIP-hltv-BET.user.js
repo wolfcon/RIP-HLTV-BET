@@ -55,7 +55,7 @@ const filters = [
     removeNonOfficialSiteElement($('.contentCol'));
 
     // remove filters ad
-    filters.array.forEach(filter => {
+    filters.forEach(filter => {
         removeClassElement(filter);
     });
 })();
