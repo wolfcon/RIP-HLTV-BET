@@ -2,7 +2,7 @@
 // @name                RIP HLTV BET
 // @name:zh-CN          HLTV 广告去除插件
 // @namespace           https://github.com/wolfcon/RIP-HLTV-BET
-// @version             1.1
+// @version             1.2
 // @description         Remove hltv.org Annoy AD
 // @description:zh-cn   清除那些🤮背景赌博广告.
 // @author              Frank
@@ -13,68 +13,12 @@
 // @run-at              document-body
 // ==/UserScript==
 
-const filters = [
-    '[class*="yabo"]'
-];
-
-function waitForKeyElements (
-    selectorTxt, actionFunction, bWaitOnce, iframeSelector
-) {
-    var targetNodes, btargetsFound;
-
-    if (typeof iframeSelector == "undefined")
-        targetNodes     = $(selectorTxt);
-    else
-        targetNodes     = $(iframeSelector).contents ()
-                                           .find (selectorTxt);
-
-    if (targetNodes  &&  targetNodes.length > 0) {
-        btargetsFound   = true;
-        targetNodes.each ( function () {
-            var jThis        = $(this);
-            var alreadyFound = jThis.data ('alreadyFound')  ||  false;
-
-            if (!alreadyFound) {
-                //--- Call the payload function.
-                var cancelFound     = actionFunction (jThis);
-                if (cancelFound)
-                    btargetsFound   = false;
-                else
-                    jThis.data ('alreadyFound', true);
-            }
-        } );
-    }
-    else {
-        btargetsFound   = false;
-    }
-
-    //--- Get the timer-control variable for this selector.
-    var controlObj      = waitForKeyElements.controlObj  ||  {};
-    var controlKey      = selectorTxt.replace (/[^\w]/g, "_");
-    var timeControl     = controlObj [controlKey];
-
-    //--- Now set or clear the timer as appropriate.
-    if (btargetsFound  &&  bWaitOnce  &&  timeControl) {
-        //--- The only condition where we need to clear the timer.
-        clearInterval (timeControl);
-        delete controlObj [controlKey]
-    }
-    else {
-        //--- Set a timer, if needed.
-        if ( ! timeControl) {
-            timeControl = setInterval ( function () {
-                    waitForKeyElements(selectorTxt,
-                                            actionFunction,
-                                            bWaitOnce,
-                                            iframeSelector
-                                        );
-                },
-                300
-            );
-            controlObj [controlKey] = timeControl;
-        }
-    }
-    waitForKeyElements.controlObj   = controlObj;
+const filters = '[class*="yabo"], [href*="bet"], a:not([href^="/"])';
+// Use ADBlock way to block some annoy element
+function removeFilters() {
+    var $hiddenStyle = $('<style type="text/css"></style>');
+    $($('head')[0]).append($hiddenStyle);
+    $hiddenStyle.append(filters + "{display: none !important; visibility: hidden !important;}");
 }
 
 function removeAll() {
@@ -114,11 +58,8 @@ function removeAll() {
     // removeContentColumnAd
     removeNonOfficialSiteElement($('.contentCol'));
 
-    // remove filters ad
-    filters.forEach(filter => {
-        removeClassElement(filter);
-    });
+    // remove extra filters
+    removeFilters();
 };
 
 removeAll();
-waitForKeyElements("div,aside", removeAll);
