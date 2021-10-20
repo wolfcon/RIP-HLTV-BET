@@ -2,7 +2,7 @@
 // @name                RIP HLTV BET
 // @name:zh-CN          HLTV 广告去除插件
 // @namespace           https://github.com/wolfcon/RIP-HLTV-BET
-// @version             1.3
+// @version             1.4
 // @description         Remove hltv.org Annoy AD
 // @description:zh-cn   清除那些🤮背景赌博广告.
 // @author              Frank
@@ -13,7 +13,14 @@
 // @run-at              document-body
 // ==/UserScript==
 
-const filters = '[class*="yabo"], [href*="bet"], [class*="regional"], [class*="world"], a:not([href^="/"])';
+const filters = [
+    '[class*="yabo"]',
+    '[href*="bet"]:not([href^="/"])',
+    '[class*="regional"]',
+    '[class*="world"]',
+    'a:not([href^="/"]):not([href^="https://www.hltv.org/"])'
+];
+
 // Use ADBlock way to block some annoy element
 (function removeFilters() {
     var $hiddenStyle = $('<style type="text/css"></style>');
