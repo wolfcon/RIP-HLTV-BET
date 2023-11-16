@@ -23,7 +23,8 @@ const filters = [
     '[class*=bg-sidebar]',
     //'a:not([href^="/"]):not([href^="https://www.hltv.org/"]):not([href^="http://www.hltv.org/"])',
     '[data-link-tracking-page="Widget"]',
-    '[class*="widget"]'
+    '[class*="widget"]',
+    '[rel="nofollow"]'
 ];
 
 // Use ADBlock way to block some annoy element
