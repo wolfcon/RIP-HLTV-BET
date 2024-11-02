@@ -38,6 +38,10 @@ const filters = [
 document.body.removeAttribute("data-href");
 document.body.removeAttribute("style");
 
+const hiddenStyle = document.createElement("style")
+hiddenStyle.innerText = "#betting {display: none}"
+document.head.appendChild(hiddenStyle)
+
 // set background to bar Color
 $(document.body).css("background-color", $(".navbar").css("background-color"));
 
@@ -51,20 +55,3 @@ $(document.body).css("background-color", $(".navbar").css("background-color"));
         adCount--;
     }
 })();
-
-function removeBettingTableInMatchDetail() {
-    setTimeout(function () {
-        var bettingDiv = document.getElementById("betting");
-        if (bettingDiv == null) return;
-        bettingDiv.removeChild(bettingDiv.firstElementChild);
-    }, 50);
-};
-
-while (1) {
-    let bettingDiv = document.getElementById("betting");
-    if (bettingDiv) {
-        console.log("remove betting")
-        removeBettingTableInMatchDetail()
-        break
-    }
-}
