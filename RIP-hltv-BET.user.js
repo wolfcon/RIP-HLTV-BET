@@ -52,10 +52,19 @@ $(document.body).css("background-color", $(".navbar").css("background-color"));
     }
 })();
 
-(function removeBettingTableInMatchDetail() {
-    setTimeout(function() {
+function removeBettingTableInMatchDetail() {
+    setTimeout(function () {
         var bettingDiv = document.getElementById("betting");
         if (bettingDiv == null) return;
         bettingDiv.removeChild(bettingDiv.firstElementChild);
     }, 50);
-})();
+};
+
+while (1) {
+    let bettingDiv = document.getElementById("betting");
+    if (bettingDiv) {
+        console.log("remove betting")
+        removeBettingTableInMatchDetail()
+        break
+    }
+}
