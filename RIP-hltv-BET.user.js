@@ -2,7 +2,7 @@
 // @name                RIP HLTV BET
 // @name:zh-CN          HLTV 广告去除插件
 // @namespace           https://github.com/wolfcon/RIP-HLTV-BET
-// @version             2.0
+// @version             2.1
 // @description         Remove hltv.org Annoy AD
 // @description:zh-cn   清除那些🤮背景赌博广告.
 // @author              Frank
@@ -24,7 +24,8 @@ const filters = [
     //'a:not([href^="/"]):not([href^="https://www.hltv.org/"]):not([href^="http://www.hltv.org/"])',
     '[data-link-tracking-page="Widget"]',
     '[class*="widget"]',
-    '[rel="nofollow"]'
+    '[rel="nofollow"]',
+    '[class^="column-"]:not([class*="col-box"])'
 ];
 
 // Use ADBlock way to block some annoy element
@@ -34,18 +35,15 @@ const filters = [
     $hiddenStyle.append(filters + "{display: none !important; visibility: hidden !important;}");
 })();
 
-// removeBackgroundAd
-document.body.removeAttribute("data-href");
-document.body.removeAttribute("style");
+function removeBackgroundAds() {
+    document.body.removeAttribute("data-href");
+    document.body.removeAttribute("style");
 
-const hiddenStyle = document.createElement("style")
-hiddenStyle.innerText = "#betting {display: none}"
-document.head.appendChild(hiddenStyle)
+    // Set background to bar Color
+    $(document.body).css("background-color", $(".navbar").css("background-color"));
+}
 
-// set background to bar Color
-$(document.body).css("background-color", $(".navbar").css("background-color"));
-
-(function removeTopAds() {
+function removeTopAds() {
     var topDiv = document.getElementsByClassName("logoCon")[0];
     if (topDiv == null) return;
     var adCount = topDiv.children.length - 1;
@@ -54,4 +52,18 @@ $(document.body).css("background-color", $(".navbar").css("background-color"));
         topDiv.removeChild(topDiv.lastElementChild);
         adCount--;
     }
-})();
+}
+
+// Set a loop to avoid cleaning failed when loading problem occurs
+let topAdsInterval = setInterval(removeTopAds, 250);
+let backgroundAdsInterval = setInterval(removeBackgroundAds, 250);
+
+setTimeout(function() {
+    clearInterval(topAdsInterval);
+    clearInterval(backgroundAdsInterval);
+    console.log("Sick Ilya! Let's fucking Go!😂");
+}, 5000);
+
+const hiddenStyle = document.createElement("style")
+hiddenStyle.innerText = "#betting {display: none}"
+document.head.appendChild(hiddenStyle)
