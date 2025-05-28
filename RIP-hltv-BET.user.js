@@ -25,7 +25,7 @@ const filters = [
     //'a:not([href^="/"]):not([href^="https://www.hltv.org/"]):not([href^="http://www.hltv.org/"])',
     '[data-link-tracking-page="Widget"]',
     '[class*="widget"]',
-    '[rel="nofollow"]',
+    '[rel="nofollow"]:not([href^="/"])',
     '[class^="column-"]:not([class*="col-box"])'
 ];
 
