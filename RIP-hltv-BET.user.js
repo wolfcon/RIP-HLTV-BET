@@ -4,7 +4,7 @@
 // @namespace           https://github.com/wolfcon/RIP-HLTV-BET
 // @version             2.5
 // @description         Remove hltv.org Annoy AD
-// @description:zh-cn   清除那些🤮背景赌博广告.
+// @description:zh-CN   清除那些🤮背景赌博广告.
 // @author              Frank
 // @require             https://code.jquery.com/jquery-3.6.0.min.js
 // @match               https://*.hltv.org/*
